@@ -4,4 +4,4 @@ jdk:
   - oraclejdk7
   - openjdk6
 
-after_success: ./scripts/cobertura.sh
+after_success: ./src/main/bash/cobertura.sh
