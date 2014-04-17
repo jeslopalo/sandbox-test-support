@@ -37,4 +37,11 @@ public class ReflectionInvoker {
 			throw e;
 		}
 	}
+
+	public static final <T> T constructor(Class<T> type, Class<?> parameterTypes, Object... initargs)
+			throws SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+
+		final Constructor<T> constructor= type.getDeclaredConstructor(parameterTypes);
+		return constructor.newInstance(initargs);
+	}
 }

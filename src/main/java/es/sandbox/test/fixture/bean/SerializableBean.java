@@ -31,15 +31,24 @@ public class SerializableBean
 
 	@Override
 	public boolean equals(Object other) {
-		if (this == other)
+		if (this == other) {
 			return true;
-		if (other == null)
+		}
+		if (other == null) {
 			return false;
-		if (!(other instanceof SerializableBean))
+		}
+		if (!(other instanceof SerializableBean)) {
 			return false;
+		}
 		final SerializableBean that= (SerializableBean) other;
-		if (this.value != that.value)
+		if (this.value != that.value) {
 			return false;
+		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "SerializableBean [value=" + this.value + "]";
 	}
 }

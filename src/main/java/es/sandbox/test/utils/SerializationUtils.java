@@ -11,6 +11,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 public final class SerializationUtils {
 
+	/**
+	 * @param object
+	 * @return
+	 * @throws IOException
+	 */
 	public static <T extends Serializable> byte[] serialize(T object)
 			throws IOException {
 
@@ -21,6 +26,13 @@ public final class SerializationUtils {
 		return baos.toByteArray();
 	}
 
+	/**
+	 * @param bytes
+	 * @param type
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static <T extends Serializable> T unserialize(byte[] bytes, Class<T> type)
 			throws IOException, ClassNotFoundException {
 
@@ -30,6 +42,10 @@ public final class SerializationUtils {
 		return type.cast(o);
 	}
 
+	/**
+	 * @param object
+	 * @return
+	 */
 	public static <T> boolean isSerializable(T object) {
 		try {
 			if (object instanceof Serializable) {
