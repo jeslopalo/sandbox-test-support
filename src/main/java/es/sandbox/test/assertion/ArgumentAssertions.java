@@ -9,67 +9,67 @@ import org.fest.reflect.core.Reflection;
 
 public class ArgumentAssertions {
 
-	public static final Object NULL= null;
-	public static final String EMPTY= "";
-	public static final String BLANK= " ";
+   public static final Object NULL= null;
+   public static final String EMPTY= "";
+   public static final String BLANK= " ";
 
-	private final Class<?> type;
-
-
-	public static <Type> ArgumentAssertions assertThatIn(Class<Type> type) {
-		return new ArgumentAssertions(type);
-	}
-
-	public ArgumentAssertions(Class<?> type) {
-		this.type= type;
-	}
-
-	public ConstructorAsserts constructorWithArguments(Class<?>... types) {
-		return new ConstructorAsserts(this.type, types);
-	}
+   private final Class<?> type;
 
 
-	@SuppressWarnings("unchecked")
-	public static <T> T nullArgument() {
-		return (T) NULL;
-	}
+   public static <Type> ArgumentAssertions assertThatIn(Class<Type> type) {
+      return new ArgumentAssertions(type);
+   }
 
-	public static String empty() {
-		return EMPTY;
-	}
+   public ArgumentAssertions(Class<?> type) {
+      this.type= type;
+   }
 
-	public static String blank() {
-		return BLANK;
-	}
-
-
-	public static class ConstructorAsserts {
-
-		private final Invoker<?> constructor;
-		private Class<? extends Exception> expectedException;
+   public ConstructorAsserts constructorWithArguments(Class<?>... types) {
+      return new ConstructorAsserts(this.type, types);
+   }
 
 
-		public ConstructorAsserts(Class<?> type, Class<?>... parameterTypes) {
-			this.constructor= Reflection
-					.constructor()
-					.withParameterTypes(parameterTypes)
-					.in(type);
-		}
+   @SuppressWarnings("unchecked")
+   public static <T> T nullArgument() {
+      return (T) NULL;
+   }
 
-		public ConstructorAsserts willThrow(Class<? extends Exception> expected) {
-			this.expectedException= expected;
-			return this;
-		}
+   public static String empty() {
+      return EMPTY;
+   }
 
-		public ConstructorAsserts invokedWith(Object... arguments) {
-			try {
-				this.constructor.newInstance(arguments);
-				failBecauseExceptionWasNotThrown(this.expectedException);
-			}
-			catch (final Exception exception) {
-				Assertions.assertThat(exception).isInstanceOf(this.expectedException);
-			}
-			return this;
-		}
-	}
+   public static String blank() {
+      return BLANK;
+   }
+
+
+   public static class ConstructorAsserts {
+
+      private final Invoker<?> constructor;
+      private Class<? extends Exception> expectedException;
+
+
+      public ConstructorAsserts(Class<?> type, Class<?>... parameterTypes) {
+         this.constructor= Reflection
+               .constructor()
+               .withParameterTypes(parameterTypes)
+               .in(type);
+      }
+
+      public ConstructorAsserts willThrow(Class<? extends Exception> expected) {
+         this.expectedException= expected;
+         return this;
+      }
+
+      public ConstructorAsserts invokedWith(Object... arguments) {
+         try {
+            this.constructor.newInstance(arguments);
+            failBecauseExceptionWasNotThrown(this.expectedException);
+         }
+         catch (final Exception exception) {
+            Assertions.assertThat(exception).isInstanceOf(this.expectedException);
+         }
+         return this;
+      }
+   }
 }
