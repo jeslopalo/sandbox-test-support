@@ -5,64 +5,61 @@ import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrow
 import org.fest.assertions.api.Assertions;
 import org.fest.reflect.core.Reflection;
 import org.fest.reflect.method.Invoker;
-import org.fest.reflect.method.StaticMethodName;
 
 
-public class StaticMethodAsserts {
+public class MethodAsserts {
 
-   private final Class<?> type;
    private final String method;
    private Class<?> returnType;
    private Class<?>[] argumentTypes;
+   private Object instance;
 
    private Class<? extends Exception> expectedException;
 
 
-   StaticMethodAsserts(Class<?> type, String method) {
-      this.type= type;
+   public MethodAsserts(String method) {
       this.method= method;
    }
 
 
-   public StaticMethodAsserts withReturnType(Class<?> type) {
+   public MethodAsserts withReturnType(Class<?> type) {
       this.returnType= type;
       return this;
    }
 
-   StaticMethodAsserts withArguments(Class<?>... types) {
+   MethodAsserts withArguments(Class<?>... types) {
       this.argumentTypes= types;
       return this;
    }
 
-   public StaticMethodAsserts willThrow(Class<? extends Exception> expected) {
+   public MethodAsserts willThrow(Class<? extends Exception> expected) {
       this.expectedException= expected;
       return this;
    }
 
-   public StaticMethodAsserts throwsNullPointerException() {
+   public MethodAsserts throwsNullPointerException() {
       this.expectedException= NullPointerException.class;
       return this;
    }
 
-   public StaticMethodAsserts throwsIllegalArgumentException() {
+   public MethodAsserts throwsIllegalArgumentException() {
       this.expectedException= IllegalArgumentException.class;
       return this;
    }
 
-   private Invoker<?> invoker() {
-      final StaticMethodName staticMethodName= Reflection.staticMethod(this.method);
-      if (this.returnType == null) {
-         return staticMethodName
-               .withParameterTypes(this.argumentTypes)
-               .in(this.type);
-      }
-      return staticMethodName
-            .withReturnType(this.returnType)
-            .withParameterTypes(this.argumentTypes)
-            .in(this.type);
+   public MethodAsserts in(Object instance) {
+      this.instance= instance;
+      return this;
    }
 
-   public StaticMethodAsserts invokedWith(Object... arguments) {
+   private Invoker<?> invoker() {
+      return Reflection.method(this.method)
+            .withReturnType(this.returnType == null? Void.class : this.returnType)
+            .withParameterTypes(this.argumentTypes)
+            .in(this.instance);
+   }
+
+   public MethodAsserts invokedWith(Object... arguments) {
       try {
          invoker().invoke(arguments);
          failBecauseExceptionWasNotThrown(this.expectedException);
@@ -73,7 +70,7 @@ public class StaticMethodAsserts {
       return this;
    }
 
-   public StaticMethodAsserts invokedWithNulls() {
+   public MethodAsserts invokedWithNulls() {
       final Object[] arguments= new Object[this.argumentTypes.length];
       return invokedWith(arguments);
    }

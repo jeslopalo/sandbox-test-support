@@ -26,11 +26,11 @@ public class ConstructorAsserts {
       return this;
    }
 
-   public ConstructorAsserts willThrowNullPointerException() {
+   public ConstructorAsserts throwsNullPointerException() {
       return willThrow(NullPointerException.class);
    }
 
-   public ConstructorAsserts willThrowIllegalArgumentException() {
+   public ConstructorAsserts throwsIllegalArgumentException() {
       return willThrow(IllegalArgumentException.class);
    }
 
@@ -44,5 +44,10 @@ public class ConstructorAsserts {
          Assertions.assertThat(exception).isInstanceOf(this.expectedException);
       }
       return this;
+   }
+
+   public ConstructorAsserts invokedWithNulls() {
+      final Object[] arguments= new Object[this.constructor.info().getParameterTypes().length];
+      return invokedWith(arguments);
    }
 }

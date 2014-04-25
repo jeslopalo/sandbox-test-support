@@ -1,16 +1,15 @@
 package es.sandbox.test.assertion;
 
 
+/**
+ * @author jeslopalo
+ */
 public class ArgumentAssertions {
-
-   public static final Object NULL= null;
-   public static final String EMPTY= "";
-   public static final String BLANK= " ";
 
    private final Class<?> type;
 
 
-   public static <Type> ArgumentAssertions assertThatIn(Class<Type> type) {
+   public static ArgumentAssertions assertThatIn(Class<?> type) {
       return new ArgumentAssertions(type);
    }
 
@@ -22,20 +21,11 @@ public class ArgumentAssertions {
       return new ConstructorAsserts(this.type, types);
    }
 
-   public StaticMethodAsserts staticMethod(String methodName) {
-      return new StaticMethodAsserts(this.type, methodName);
+   public StaticMethodAsserts staticMethod(String methodName, Class<?>... arguments) {
+      return new StaticMethodAsserts(this.type, methodName).withArguments(arguments);
    }
 
-   @SuppressWarnings("unchecked")
-   public static <T> T nullArgument() {
-      return (T) NULL;
-   }
-
-   public static String empty() {
-      return EMPTY;
-   }
-
-   public static String blank() {
-      return BLANK;
+   public MethodAsserts method(String methodName, Class<?> arguments) {
+      return new MethodAsserts(methodName).withArguments(arguments);
    }
 }
