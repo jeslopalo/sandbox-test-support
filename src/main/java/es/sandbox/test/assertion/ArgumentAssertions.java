@@ -6,26 +6,15 @@ package es.sandbox.test.assertion;
  */
 public class ArgumentAssertions {
 
-   private final Class<?> type;
-
-
-   public static ArgumentAssertions assertThatIn(Class<?> type) {
-      return new ArgumentAssertions(type);
+   public static <Type> ConstructorAsserts assertThatConstructor(Class<Type> type, Class<?>... types) {
+      return new ConstructorAsserts(type, types);
    }
 
-   private ArgumentAssertions(Class<?> type) {
-      this.type= type;
+   public static <Type> StaticMethodAsserts assertThatStaticMethod(Class<Type> type, String methodName, Class<?>... arguments) {
+      return new StaticMethodAsserts(type, methodName).withArguments(arguments);
    }
 
-   public ConstructorAsserts constructor(Class<?>... types) {
-      return new ConstructorAsserts(this.type, types);
-   }
-
-   public StaticMethodAsserts staticMethod(String methodName, Class<?>... arguments) {
-      return new StaticMethodAsserts(this.type, methodName).withArguments(arguments);
-   }
-
-   public MethodAsserts method(String methodName, Class<?> arguments) {
-      return new MethodAsserts(methodName).withArguments(arguments);
+   public static <Type> MethodAsserts assertThatMethod(Type instance, String methodName, Class<?>... arguments) {
+      return new MethodAsserts(instance, methodName).withArguments(arguments);
    }
 }

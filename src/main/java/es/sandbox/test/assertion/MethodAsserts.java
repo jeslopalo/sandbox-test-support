@@ -17,7 +17,8 @@ public class MethodAsserts {
    private Class<? extends Exception> expectedException;
 
 
-   public MethodAsserts(String method) {
+   public MethodAsserts(Object instance, String method) {
+      this.instance= instance;
       this.method= method;
    }
 
@@ -47,7 +48,7 @@ public class MethodAsserts {
       return this;
    }
 
-   public MethodAsserts in(Object instance) {
+   MethodAsserts in(Object instance) {
       this.instance= instance;
       return this;
    }
