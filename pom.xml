@@ -7,7 +7,7 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sandbox-test-support</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Support utilities for testing</description>
 	<url>https://github.com/jeslopalo/sandbox-test-support</url>
 
