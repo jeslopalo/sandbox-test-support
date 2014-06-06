@@ -13,10 +13,10 @@ public class ConstructorAsserts {
    private Class<? extends Exception> expectedException;
 
 
-   ConstructorAsserts(Class<?> type, Class<?>... parameterTypes) {
+   ConstructorAsserts(Class<?> type, Arguments arguments) {
       this.constructor= Reflection
             .constructor()
-            .withParameterTypes(parameterTypes)
+            .withParameterTypes(arguments.get())
             .in(type);
    }
 

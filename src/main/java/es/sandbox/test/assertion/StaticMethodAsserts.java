@@ -13,7 +13,7 @@ public class StaticMethodAsserts {
    private final Class<?> type;
    private final String method;
    private Class<?> returnType;
-   private Class<?>[] argumentTypes;
+   private Arguments arguments;
 
    private Class<? extends Exception> expectedException;
 
@@ -29,8 +29,8 @@ public class StaticMethodAsserts {
       return this;
    }
 
-   StaticMethodAsserts withArguments(Class<?>... types) {
-      this.argumentTypes= types;
+   StaticMethodAsserts withArguments(Arguments arguments) {
+      this.arguments= arguments;
       return this;
    }
 
@@ -53,12 +53,12 @@ public class StaticMethodAsserts {
       final StaticMethodName staticMethodName= Reflection.staticMethod(this.method);
       if (this.returnType == null) {
          return staticMethodName
-               .withParameterTypes(this.argumentTypes)
+               .withParameterTypes(this.arguments.get())
                .in(this.type);
       }
       return staticMethodName
             .withReturnType(this.returnType)
-            .withParameterTypes(this.argumentTypes)
+            .withParameterTypes(this.arguments.get())
             .in(this.type);
    }
 
@@ -74,7 +74,7 @@ public class StaticMethodAsserts {
    }
 
    public StaticMethodAsserts invokedWithNulls() {
-      final Object[] arguments= new Object[this.argumentTypes.length];
+      final Object[] arguments= new Object[this.arguments.size()];
       return invokedWith(arguments);
    }
 }

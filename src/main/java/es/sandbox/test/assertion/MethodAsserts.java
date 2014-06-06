@@ -11,7 +11,8 @@ public class MethodAsserts {
 
    private final String method;
    private Class<?> returnType;
-   private Class<?>[] argumentTypes;
+   // private Class<?>[] argumentTypes;
+   private Arguments arguments;
    private Object instance;
 
    private Class<? extends Exception> expectedException;
@@ -28,8 +29,8 @@ public class MethodAsserts {
       return this;
    }
 
-   MethodAsserts withArguments(Class<?>... types) {
-      this.argumentTypes= types;
+   MethodAsserts withArguments(Arguments arguments) {
+      this.arguments= arguments;
       return this;
    }
 
@@ -56,7 +57,7 @@ public class MethodAsserts {
    private Invoker<?> invoker() {
       return Reflection.method(this.method)
             .withReturnType(this.returnType == null? Void.class : this.returnType)
-            .withParameterTypes(this.argumentTypes)
+            .withParameterTypes(this.arguments.get())
             .in(this.instance);
    }
 
@@ -72,7 +73,7 @@ public class MethodAsserts {
    }
 
    public MethodAsserts invokedWithNulls() {
-      final Object[] arguments= new Object[this.argumentTypes.length];
+      final Object[] arguments= new Object[this.arguments.size()];
       return invokedWith(arguments);
    }
 }
