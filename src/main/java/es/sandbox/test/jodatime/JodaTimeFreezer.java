@@ -12,6 +12,13 @@ public class JodaTimeFreezer {
 
 
    /**
+    * @throws UnsupportedOperationException
+    */
+   private JodaTimeFreezer() throws UnsupportedOperationException {
+      throw new UnsupportedOperationException();
+   }
+
+   /**
     * @param frozenDateTime
     */
    public static void freeze(DateTime frozenDateTime) {
