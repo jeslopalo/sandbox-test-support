@@ -45,9 +45,10 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:git@github.com:jeslopalo/sandbox-test-support.git</connection>
+		<connection>scm:git:https://github.com/jeslopalo/sandbox-test-support.git</connection>
 		<developerConnection>scm:git:git@github.com:jeslopalo/sandbox-test-support.git</developerConnection>
-		<url>git@github.com:jeslopalo/sandbox-test-support.git</url>
+		<url>https://github.com/jeslopalo/sandbox-test-support</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<prerequisites>
@@ -138,7 +139,7 @@
 			
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.1</version>
+				<version>2.5.1</version>
 				<configuration>
 					<useReleaseProfile>false</useReleaseProfile>
 					<releaseProfiles>release</releaseProfiles>
@@ -227,6 +228,22 @@
 			<id>release</id>
 			<build>
 				<plugins>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>				
+				
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -252,7 +269,7 @@
 								</goals>
 							</execution>
 						</executions>
-	
+
 						<configuration>
 							<!-- bootclasspath required by Sun's JVM -->
 							<bootclasspath>${sun.boot.class.path}</bootclasspath>
@@ -260,7 +277,7 @@
 							<doctitle>${project.name} (${project.version})</doctitle>
 							<!-- Apple's JVM sometimes requires more memory -->
 							<additionalJOption>-J-Xmx1024m</additionalJOption>
-	
+					
 							<show>package</show>
 							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
 							<docletArtifact>
@@ -268,7 +285,7 @@
 								<artifactId>umlgraph</artifactId>
 								<version>5.6</version>
 							</docletArtifact>
-	
+					
 							<additionalparam>
 								-views
 								-all
@@ -277,7 +294,7 @@
 								-inferdep
 								-inferdepinpackage
 								-inferrel
-	                    </additionalparam>
+					        </additionalparam>
 							<useStandardDocletOptions>true</useStandardDocletOptions>
 						</configuration>
 					</plugin>
