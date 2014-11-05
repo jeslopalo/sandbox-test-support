@@ -37,6 +37,13 @@
 		<url>https://github.com/jeslopalo/sandbox-test-support/issues</url>
 	</issueManagement>
 
+	<distributionManagement>
+		<repository>
+			<id>bintray</id>
+			<url>https://api.bintray.com/maven/jeslopalo/jeslopalo/sandbox-maven-repository/sandbox-test-support</url>
+		</repository>
+	</distributionManagement>
+
 	<scm>
 		<connection>scm:git:git@github.com:jeslopalo/sandbox-test-support.git</connection>
 		<developerConnection>scm:git:git@github.com:jeslopalo/sandbox-test-support.git</developerConnection>
@@ -46,13 +53,6 @@
 	<prerequisites>
 		<maven>3.0.0</maven>
 	</prerequisites>
-
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -125,6 +125,7 @@
 					</includes>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -134,60 +135,17 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.0.4</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8.1</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.1</version>
 				<configuration>
-					<!-- bootclasspath required by Sun's JVM -->
-					<bootclasspath>${sun.boot.class.path}</bootclasspath>
-					<!-- General Javadoc settings -->
-					<doctitle>${project.name} (${project.version})</doctitle>
-					<!-- Apple's JVM sometimes requires more memory -->
-					<additionalJOption>-J-Xmx1024m</additionalJOption>
-
-					<show>package</show>
-					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-					<docletArtifact>
-						<groupId>org.umlgraph</groupId>
-						<artifactId>umlgraph</artifactId>
-						<version>5.6</version>
-					</docletArtifact>
-
-					<additionalparam>
-						-views
-						-all
-						-constructors
-						-hide java.(util|lang).*
-						-inferdep
-						-inferdepinpackage
-						-inferrel
-					</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
-			</plugin>
+			</plugin>			
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -264,6 +222,68 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.0.4</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.8.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+	
+						<configuration>
+							<!-- bootclasspath required by Sun's JVM -->
+							<bootclasspath>${sun.boot.class.path}</bootclasspath>
+							<!-- General Javadoc settings -->
+							<doctitle>${project.name} (${project.version})</doctitle>
+							<!-- Apple's JVM sometimes requires more memory -->
+							<additionalJOption>-J-Xmx1024m</additionalJOption>
+	
+							<show>package</show>
+							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+							<docletArtifact>
+								<groupId>org.umlgraph</groupId>
+								<artifactId>umlgraph</artifactId>
+								<version>5.6</version>
+							</docletArtifact>
+	
+							<additionalparam>
+								-views
+								-all
+								-constructors
+								-hide java.(util|lang).*
+								-inferdep
+								-inferdepinpackage
+								-inferrel
+	                    </additionalparam>
+							<useStandardDocletOptions>true</useStandardDocletOptions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>  		
 	</profiles>
 
 	<reporting>
