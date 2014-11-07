@@ -5,4 +5,8 @@ sandbox-test-support
 
 Support utilities for testing
 
+Download
+--------
+[ ![Download](https://api.bintray.com/packages/jeslopalo/sandbox-maven-repository/sandbox-test-support/images/download.svg) ](https://bintray.com/jeslopalo/sandbox-maven-repository/sandbox-test-support/_latestVersion)
+
 > **Work in progress!**
