@@ -8,29 +8,29 @@ import org.slf4j.LoggerFactory;
 
 public class JodaTimeFreezer {
 
-   private static final Logger LOGGER= LoggerFactory.getLogger(JodaTimeFreezer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JodaTimeFreezer.class);
 
 
-   /**
-    * @throws UnsupportedOperationException
-    */
-   private JodaTimeFreezer() throws UnsupportedOperationException {
-      throw new UnsupportedOperationException();
-   }
+    /**
+     * @throws UnsupportedOperationException
+     */
+    private JodaTimeFreezer() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
+    }
 
-   /**
-    * @param frozenDateTime
-    */
-   public static void freeze(DateTime frozenDateTime) {
-      LOGGER.debug("Freezing time at {}", frozenDateTime);
-      DateTimeUtils.setCurrentMillisFixed(frozenDateTime.getMillis());
-   }
+    /**
+     * @param frozenDateTime
+     */
+    public static void freeze(DateTime frozenDateTime) {
+        LOGGER.debug("Freezing time at {}", frozenDateTime);
+        DateTimeUtils.setCurrentMillisFixed(frozenDateTime.getMillis());
+    }
 
-   /**
-	 * 
-	 */
-   public static void unfreeze() {
-      LOGGER.debug("Unfreezing time");
-      DateTimeUtils.setCurrentMillisSystem();
-   }
+    /**
+     *
+     */
+    public static void unfreeze() {
+        LOGGER.debug("Unfreezing time");
+        DateTimeUtils.setCurrentMillisSystem();
+    }
 }
