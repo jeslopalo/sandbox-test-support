@@ -22,7 +22,7 @@ public class ReflectionInvoker {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public static final <T> T privateDefaultConstructor(Class<T> type, Class<? extends Throwable> exceptionType)
+    public static <T> T privateDefaultConstructor(Class<T> type, Class<? extends Throwable> exceptionType)
         throws SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         try {
@@ -37,7 +37,7 @@ public class ReflectionInvoker {
         }
     }
 
-    public static final <T> T constructor(Class<T> type, Class<?> parameterTypes, Object... initargs)
+    public static <T> T constructor(Class<T> type, Class<?> parameterTypes, Object... initargs)
         throws SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         final Constructor<T> constructor = type.getDeclaredConstructor(parameterTypes);

@@ -41,10 +41,7 @@ public class SerializableBean
             return false;
         }
         final SerializableBean that = (SerializableBean) other;
-        if (this.value != that.value) {
-            return false;
-        }
-        return true;
+        return this.value == that.value;
     }
 
     @Override

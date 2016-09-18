@@ -1,10 +1,10 @@
 package es.sandbox.test.assertion;
 
-import org.fest.assertions.api.Assertions;
 import org.fest.reflect.constructor.Invoker;
 import org.fest.reflect.core.Reflection;
 
-import static org.fest.assertions.api.Assertions.failBecauseExceptionWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 
 public class ConstructorAsserts {
@@ -40,7 +40,7 @@ public class ConstructorAsserts {
             this.constructor.newInstance(arguments);
             failBecauseExceptionWasNotThrown(this.expectedException);
         } catch (final Exception exception) {
-            Assertions.assertThat(exception).isInstanceOf(this.expectedException);
+            assertThat(exception).isInstanceOf(this.expectedException);
         }
         return this;
     }
