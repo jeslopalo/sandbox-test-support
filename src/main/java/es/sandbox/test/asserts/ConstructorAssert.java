@@ -9,10 +9,6 @@ public final class ConstructorAssert
     extends AbstractParameterAssert<ConstructorAssert, Constructor> {
 
     ConstructorAssert(Constructor actual) {
-        super(actual, constructorInvoker(), ConstructorAssert.class);
-    }
-
-    private static ExecutableInvoker<Constructor> constructorInvoker() {
-        return (executable, arguments) -> executable.newInstance(arguments);
+        super(actual, Constructor::newInstance, ConstructorAssert.class);
     }
 }

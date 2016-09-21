@@ -134,7 +134,7 @@ public class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E 
         }
 
         private E executable() {
-            return (E) this.ongoingAssert.actual;
+            return this.ongoingAssert.actual;
         }
     }
 }
