@@ -5,14 +5,14 @@ import java.lang.reflect.Constructor;
 /**
  * Created by jeslopalo on 18/9/16.
  */
-public final class ConstructorAssert<T>
-    extends AbstractParameterAssert<ConstructorAssert<T>, Constructor<T>> {
+public final class ConstructorAssert
+    extends AbstractParameterAssert<ConstructorAssert, Constructor> {
 
-    ConstructorAssert(Constructor<T> actual) {
+    ConstructorAssert(Constructor actual) {
         super(actual, constructorInvoker(), ConstructorAssert.class);
     }
 
-    private static <E> ExecutableInvoker<Constructor<E>> constructorInvoker() {
+    private static ExecutableInvoker<Constructor> constructorInvoker() {
         return (executable, arguments) -> executable.newInstance(arguments);
     }
 }
