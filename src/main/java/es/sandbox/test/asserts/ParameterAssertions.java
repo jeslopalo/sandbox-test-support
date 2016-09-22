@@ -1,5 +1,7 @@
 package es.sandbox.test.asserts;
 
+import es.sandbox.test.asserts.MethodAssert.OngoingMethodAssert;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -20,8 +22,8 @@ public final class ParameterAssertions {
      * @param method
      * @return
      */
-    public static MethodAssert assertThat(final Method method) {
-        return new MethodAssert(method);
+    public static <T> OngoingMethodAssert<T> assertThat(final Method method) {
+        return new OngoingMethodAssert<>(method);
     }
 
     private ParameterAssertions() {

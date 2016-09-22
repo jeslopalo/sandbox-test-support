@@ -118,9 +118,6 @@ public class ConstructorAssertSpecs {
             if (value == null) {
                 throw new NullPointerException();
             }
-            if (value.length() == 0) {
-                throw new IllegalArgumentException();
-            }
             if (value.trim().length() == 0) {
                 throw new IllegalArgumentException();
             }
