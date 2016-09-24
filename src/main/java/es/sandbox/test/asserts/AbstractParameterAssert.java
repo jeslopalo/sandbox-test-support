@@ -87,7 +87,7 @@ public class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E 
                 invoke(arguments);
             } catch (InvocationTargetException exception) {
                 onInvocationException(exception);
-            } catch (Throwable throwable) {
+            } catch (Exception throwable) {
                 onUnexpectedException(throwable);
             }
             return this;
@@ -129,8 +129,8 @@ public class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E 
             }
         }
 
-        private void onUnexpectedException(Throwable throwable) {
-            fail(String.format("Unable to find executable %s", executable()), throwable);
+        private void onUnexpectedException(Exception exception) {
+            fail(String.format("Unable to find executable %s", executable()), exception);
         }
 
         private E executable() {

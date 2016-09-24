@@ -114,6 +114,112 @@ public class MethodAssertSpecs {
         }
     }
 
+    public static final class WhenAStaticMethodHasNoArguments {
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_method_is_not_static() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+
+            assertThat(FixtureBean.class.getMethod("methodWithoutArgumentsAndVoidReturn"))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWithoutParams();
+        }
+
+        @Test
+        public void it_should_not_fail_when_not_raise_exceptions() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethod"))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWithoutParams();
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_not_raise_expected_exception() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethod"))
+                .beingStatic()
+                .willThrowNullPointerException()
+                .whenInvokedWithoutParams();
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_invoked_with_params() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethod"))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWith("");
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_invoked_with_null_params() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+            assertThat(FixtureBean.class.getMethod("staticMethod"))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWith(new Object[]{null});
+        }
+    }
+
+    public static final class WhenAStaticMethodHasAStringArgument {
+
+        @Test
+        public void it_should_not_fail_when_assert_expected_behavior() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("");
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith(" ");
+        }
+
+        @Test
+        public void it_should_be_possible_to_chain_several_invocations() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWith("a")
+                .whenInvokedWith("b")
+                .whenInvokedWith("c");
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_raise_an_unexpected_exception() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWith(FixtureBean.BADDATA);
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_not_raise_an_expected_exception() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .willThrow(IllegalFormatException.class)
+                .whenInvokedWith("bubu");
+        }
+
+        @Test(expected = AssertionError.class)
+        public void it_should_fail_when_invoked_without_params() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+
+            assertThat(FixtureBean.class.getMethod("staticMethodWithAStringArgumentAndVoidReturn", String.class))
+                .beingStatic()
+                .wontThrowAnyException()
+                .whenInvokedWithoutParams();
+        }
+    }
 
     @Ignore
     private static final class FixtureBean {
@@ -122,6 +228,23 @@ public class MethodAssertSpecs {
 
         public FixtureBean() {
 
+        }
+
+        public static void staticMethod() {
+
+        }
+
+        public static void staticMethodWithAStringArgumentAndVoidReturn(final String argument) {
+
+            if (argument == null) {
+                throw new NullPointerException();
+            }
+            if (argument.trim().length() == 0) {
+                throw new IllegalArgumentException();
+            }
+            if (argument.equals(BADDATA)) {
+                throw new IllegalArgumentException(BADDATA);
+            }
         }
 
         public void methodWithoutArgumentsAndVoidReturn() {
