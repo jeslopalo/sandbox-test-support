@@ -1,6 +1,9 @@
 package es.sandbox.test.asserts;
 
+import org.assertj.core.api.Assertions;
+
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * Created by jeslopalo on 21/9/16.
@@ -26,6 +29,12 @@ final class MethodAssert<T>
 
         public MethodAssert in(T instance) {
             return new MethodAssert(this.method, instance);
+        }
+
+        public MethodAssert beingStatic() {
+            Assertions.assertThat(Modifier.isStatic(this.method.getModifiers())).isTrue();
+
+            return new MethodAssert(this.method, null);
         }
     }
 }
