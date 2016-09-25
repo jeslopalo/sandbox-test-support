@@ -88,6 +88,7 @@ public final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E
     private E executable() {
         return this.ongoingAssert.getActual();
     }
+
 }
 
 @FunctionalInterface

@@ -75,14 +75,7 @@
             <version>2.9.4</version>
             <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <!-- Fest reflect -->
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-reflect</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-
+        
         <dependency>
             <!-- Assertj -->
             <groupId>org.assertj</groupId>
