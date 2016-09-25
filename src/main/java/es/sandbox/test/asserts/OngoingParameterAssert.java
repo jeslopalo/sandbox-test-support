@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Created by jeslopalo on 25/9/16.
  */
-public final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E>, E extends Executable> {
+final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E>, E extends Executable> {
 
     private final T ongoingAssert;
     private final Optional<Class<? extends Throwable>> expected;
@@ -30,10 +30,8 @@ public final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E
     /**
      * @param arguments
      * @return
-     * @throws IllegalAccessException
-     * @throws InstantiationException
      */
-    public OngoingParameterAssert whenInvokedWith(Object... arguments) throws IllegalAccessException, InstantiationException {
+    public OngoingParameterAssert whenInvokedWith(Object... arguments) {
 
         try {
             invoke(arguments);
@@ -47,19 +45,15 @@ public final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E
 
     /**
      * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
      */
-    public OngoingParameterAssert whenInvokedWithNulls() throws InstantiationException, IllegalAccessException {
+    public OngoingParameterAssert whenInvokedWithNulls() {
         return whenInvokedWith(new Object[executable().getParameterCount()]);
     }
 
     /**
      * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
      */
-    public OngoingParameterAssert whenInvokedWithoutParams() throws InstantiationException, IllegalAccessException {
+    public OngoingParameterAssert whenInvokedWithoutParams() {
         return whenInvokedWith();
     }
 

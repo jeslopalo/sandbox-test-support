@@ -18,7 +18,7 @@ public class ConstructorAssertSpecs {
     public static final class WhenAConstructorHasNoArguments {
 
         @Test
-        public void it_should_not_fail_when_not_raise_exceptions() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+        public void it_should_not_fail_when_not_raise_exceptions() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor())
                 .wontThrowAnyException()
@@ -26,7 +26,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_not_raise_expected_exceptions() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+        public void it_should_fail_when_not_raise_expected_exceptions() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor())
                 .willThrowNullPointerException()
@@ -34,7 +34,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_invoked_with_params() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public void it_should_fail_when_invoked_with_params() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor())
                 .wontThrowAnyException()
@@ -42,7 +42,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_invoked_with_null_params() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public void it_should_fail_when_invoked_with_null_params() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor())
                 .wontThrowAnyException()
@@ -54,7 +54,7 @@ public class ConstructorAssertSpecs {
     public static final class WhenAConstructorHasAStringArgument {
 
         @Test
-        public void it_should_not_fail_when_assert_expected_behavior() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+        public void it_should_not_fail_when_assert_expected_behavior() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor(String.class))
                 .willThrowNullPointerException()
@@ -70,7 +70,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test
-        public void it_should_be_possible_to_chain_several_invocations() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public void it_should_be_possible_to_chain_several_invocations() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor(String.class))
                 .wontThrowAnyException()
@@ -80,7 +80,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_raise_an_unexpected_exception() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public void it_should_fail_when_raise_an_unexpected_exception() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor(String.class))
                 .wontThrowAnyException()
@@ -88,7 +88,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_not_raise_an_expected_exception() throws NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public void it_should_fail_when_not_raise_an_expected_exception() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor(String.class))
                 .willThrow(IllegalFormatException.class)
@@ -96,7 +96,7 @@ public class ConstructorAssertSpecs {
         }
 
         @Test(expected = AssertionError.class)
-        public void it_should_fail_when_invoked_without_params() throws NoSuchMethodException, IllegalAccessException, InstantiationException {
+        public void it_should_fail_when_invoked_without_params() throws NoSuchMethodException {
 
             assertThat(FixtureBean.class.getConstructor(String.class))
                 .wontThrowAnyException()

@@ -12,7 +12,7 @@ class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E extends
 
     private final ExecutableInvoker<E> executableInvoker;
 
-    public AbstractParameterAssert(E actual, ExecutableInvoker<E> executableInvoker, Class<?> selfType) {
+    AbstractParameterAssert(E actual, ExecutableInvoker<E> executableInvoker, Class<?> selfType) {
         super(actual, selfType);
 
         this.executableInvoker = executableInvoker;

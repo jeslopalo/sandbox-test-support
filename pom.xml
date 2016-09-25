@@ -75,7 +75,7 @@
             <version>2.9.4</version>
             <optional>true</optional>
         </dependency>
-        
+
         <dependency>
             <!-- Assertj -->
             <groupId>org.assertj</groupId>
@@ -161,6 +161,7 @@
                             <maxmem>256m</maxmem>
                             <!-- aggregated reports for multi-module projects -->
                             <aggregate>true</aggregate>
+                            <check/>
                         </configuration>
                     </plugin>
 
