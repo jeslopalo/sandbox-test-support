@@ -1,4 +1,4 @@
-package es.sandbox.test.asserts;
+package es.sandbox.test.asserts.parameter;
 
 import java.lang.reflect.Executable;
 import java.lang.reflect.InvocationTargetException;

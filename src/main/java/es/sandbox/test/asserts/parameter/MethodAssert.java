@@ -1,4 +1,4 @@
-package es.sandbox.test.asserts;
+package es.sandbox.test.asserts.parameter;
 
 import org.assertj.core.api.Assertions;
 

@@ -1,6 +1,6 @@
-package es.sandbox.test.asserts;
+package es.sandbox.test.asserts.parameter;
 
-import es.sandbox.test.asserts.MethodAssert.OngoingMethodAssert;
+import es.sandbox.test.asserts.parameter.MethodAssert.OngoingMethodAssert;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

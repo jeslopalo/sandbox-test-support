@@ -1,4 +1,4 @@
-package es.sandbox.test.asserts;
+package es.sandbox.test.asserts.parameter;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 import java.util.IllegalFormatException;
 
-import static es.sandbox.test.asserts.ParameterAssertions.assertThat;
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
 
 /**
  * Created by jeslopalo on 22/9/16.
