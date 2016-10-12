@@ -178,22 +178,6 @@
             <id>release</id>
             <build>
                 <plugins>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -219,34 +203,6 @@
                                 </goals>
                             </execution>
                         </executions>
-
-                        <configuration>
-                            <!-- bootclasspath required by Sun's JVM -->
-                            <bootclasspath>${sun.boot.class.path}</bootclasspath>
-                            <!-- General Javadoc settings -->
-                            <doctitle>${project.name} (${project.version})</doctitle>
-                            <!-- Apple's JVM sometimes requires more memory -->
-                            <additionalJOption>-J-Xmx1024m</additionalJOption>
-
-                            <show>package</show>
-                            <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                            <docletArtifact>
-                                <groupId>org.umlgraph</groupId>
-                                <artifactId>umlgraph</artifactId>
-                                <version>5.6</version>
-                            </docletArtifact>
-
-                            <additionalparam>
-                                -views
-                                -all
-                                -constructors
-                                -hide java.(util|lang).*
-                                -inferdep
-                                -inferdepinpackage
-                                -inferrel
-                            </additionalparam>
-                            <useStandardDocletOptions>true</useStandardDocletOptions>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
