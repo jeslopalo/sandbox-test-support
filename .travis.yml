@@ -1,8 +1,22 @@
 language: java
-
 jdk:
-  - oraclejdk7
-  - openjdk7
-  - openjdk6
+  - oraclejdk8
 
-after_success: ./src/main/scripts/build/cobertura.sh
+env:
+  global:
+    - BUILD_TIMESTAMP=$(date +%Y-%m-%d)
+    - BINTRAY_USERNAME="jeslopalo"
+
+after_success: "./src/main/scripts/build/cobertura.sh"
+
+before_deploy: "echo '$(date +%Y-%m-%d) - Deploying to bintray'"
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: mvn deploy -P release -Dmaven.test.skip=true --batch-mode --settings .travis.settings.xml
+  on:
+    tags: true
+    jdk: oraclejdk8
+
+after_deploy: "echo '$(date +%Y-%m-%d) - Artifact has been deployed into bintray!'"
