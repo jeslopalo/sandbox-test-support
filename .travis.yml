@@ -14,7 +14,7 @@ before_deploy: "echo '$(date +%Y-%m-%d) - Deploying to bintray'"
 deploy:
   skip_cleanup: true
   provider: script
-  script: mvn deploy -P release --batch-mode --settings .travis.settings.xml
+  script: mvn deploy -P release -Dmaven.test.skip=true --batch-mode --settings .travis.settings.xml
   on:
     tags: true
     jdk: oraclejdk8
