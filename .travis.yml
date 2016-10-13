@@ -3,20 +3,21 @@ jdk:
   - oraclejdk8
 
 env:
-  - BUILD_TIMESTAMP=$(date +%Y-%m-%d) BINTRAY_USER_NAME="jeslopalo" DRY_RUN=true
-
-#script: mvn install -Dbuild.number=$TRAVIS_BUILD_NUMBER
+  global:
+    - BUILD_TIMESTAMP=$(date +%Y-%m-%d)
+    - BINTRAY_USERNAME="jeslopalo"
+    - BINTRAY_API_KEY="b2WG10YDu9sXELAqCXXiHmovcHsM1o7t7+oLJyHrkYeeXClHsli1bdXzeX0vcfSAGOQA0PSvZwQzN67puXG82zavfT7mQyIvFb3dazRCY7XYqzTqRaFjFZbtVOGgpLr2notbOpvUem2fjoR+Vsq+S1/mf79mjzrouVr8Qx7ejQo="
 
 after_success: "./src/main/scripts/build/cobertura.sh"
 
 before_deploy: echo 'Deploying to bintray'
+
 deploy:
-  provider: bintray
-  file: ./provider.json
-  user: $BINTRAY_USER_NAME
-  key:
-    secure: b2WG10YDu9sXELAqCXXiHmovcHsM1o7t7+oLJyHrkYeeXClHsli1bdXzeX0vcfSAGOQA0PSvZwQzN67puXG82zavfT7mQyIvFb3dazRCY7XYqzTqRaFjFZbtVOGgpLr2notbOpvUem2fjoR+Vsq+S1/mf79mjzrouVr8Qx7ejQo=
-  dry-run: $DRY_RUN
+  skip_cleanup: true
+  provider: script
+  script: mvn deploy -P release --batch-mode
   on:
     tags: true
+    condition: "$TRAVIS_JDK_VERSION == oraclejdk8"
+
 after_deploy: echo 'Artifact has been deployed into bintray!'
