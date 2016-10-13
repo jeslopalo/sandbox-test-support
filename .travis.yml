@@ -6,18 +6,17 @@ env:
   global:
     - BUILD_TIMESTAMP=$(date +%Y-%m-%d)
     - BINTRAY_USERNAME="jeslopalo"
-    - BINTRAY_API_KEY="b2WG10YDu9sXELAqCXXiHmovcHsM1o7t7+oLJyHrkYeeXClHsli1bdXzeX0vcfSAGOQA0PSvZwQzN67puXG82zavfT7mQyIvFb3dazRCY7XYqzTqRaFjFZbtVOGgpLr2notbOpvUem2fjoR+Vsq+S1/mf79mjzrouVr8Qx7ejQo="
 
 after_success: "./src/main/scripts/build/cobertura.sh"
 
-before_deploy: echo 'Deploying to bintray'
+before_deploy: "echo '$(date +%Y-%m-%d) - Deploying to bintray'"
 
 deploy:
   skip_cleanup: true
   provider: script
-  script: mvn deploy -P release --batch-mode
+  script: mvn deploy -P release --batch-mode --settings .travis.settings.xml
   on:
     tags: true
-    condition: "$TRAVIS_JDK_VERSION == oraclejdk8"
+    jdk: oraclejdk8
 
-after_deploy: echo 'Artifact has been deployed into bintray!'
+after_deploy: "echo '$(date +%Y-%m-%d) - Artifact has been deployed into bintray!'"

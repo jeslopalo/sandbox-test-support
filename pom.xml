@@ -39,8 +39,9 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/maven/jeslopalo/sandbox-maven-repository/sandbox-test-support</url>
+            <id>sandbox-maven-repository</id>
+            <name>Bintray sandbox-maven-repository</name>
+            <url>https://api.bintray.com/maven/jeslopalo/sandbox-maven-repository/sandbox-test-support/;publish=1</url>
         </repository>
     </distributionManagement>
 
