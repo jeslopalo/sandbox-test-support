@@ -1,3 +1,10 @@
+### v1.0.1 (2016-12-29) - Fix visibility issues
+
+  * [831d36d] Configure codeclimate service
+  * [23185f1] Fix a visibility class issue
+  * [b1af0da] Modify codeclimate preferences
+
+
 ### v1.0.0 (2016-10-14) - Main assertions rewriting & CI configuration
 
   * [f49f071] [maven-release-plugin] prepare for next development iteration
@@ -27,6 +34,7 @@
   * [52318c9] Fix bintray authentication
   * [e79ab77] Reduce maven unnecessary work
   * [67ed3dd] Bump version to 1.0.0
+  * [e64f83a] Update CHANGELOG.md with 1.0.0 changes
 
 
 ### v0.1.1 (2014-11-07) - [maven-release-plugin] copy for tag 0.1.1
