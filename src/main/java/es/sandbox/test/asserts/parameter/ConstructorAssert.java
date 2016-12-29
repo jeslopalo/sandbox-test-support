@@ -5,7 +5,7 @@ import java.lang.reflect.Constructor;
 /**
  * Created by jeslopalo on 18/9/16.
  */
-final class ConstructorAssert
+public final class ConstructorAssert
     extends AbstractParameterAssert<ConstructorAssert, Constructor> {
 
     ConstructorAssert(Constructor constructor) {

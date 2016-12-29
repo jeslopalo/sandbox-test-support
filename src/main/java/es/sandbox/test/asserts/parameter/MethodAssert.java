@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
 /**
  * Created by jeslopalo on 21/9/16.
  */
-final class MethodAssert<T>
+public final class MethodAssert<T>
     extends AbstractParameterAssert<MethodAssert<T>, Method> {
 
     private MethodAssert(Method method, T instance) {
@@ -19,7 +19,7 @@ final class MethodAssert<T>
         return (executable, arguments) -> executable.invoke(instance, arguments);
     }
 
-    final static class OngoingMethodAssert<T> {
+    public static final class OngoingMethodAssert<T> {
 
         private final Method method;
 

@@ -7,7 +7,7 @@ import java.lang.reflect.Executable;
 /**
  * Created by jeslopalo on 21/9/16.
  */
-class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E extends Executable>
+public class AbstractParameterAssert<A extends AbstractParameterAssert<A, E>, E extends Executable>
     extends AbstractAssert<A, E> {
 
     private final ExecutableInvoker<E> executableInvoker;

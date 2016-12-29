@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Created by jeslopalo on 25/9/16.
  */
-final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E>, E extends Executable> {
+public final class OngoingParameterAssert<T extends AbstractParameterAssert<T, E>, E extends Executable> {
 
     private final T ongoingAssert;
     private final Optional<Class<? extends Throwable>> expected;
